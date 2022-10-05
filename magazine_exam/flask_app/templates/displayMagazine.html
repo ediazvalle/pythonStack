@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Sasquatch Display</title>
+</head>
+<body>
+    <header>
+        <h1>Add magazine</h1>
+        <nav>
+            {% block menu %} {% include 'menu.html' %} {% endblock menu %}
+        </nav>
+        {{user.fullName()}}
+    </header>
+    <div class="flash">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for x in messages %}
+                    <h4>{{x}}</h4>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    <main>
+        <h2>Title: {{magazine.title}}</h2>
+        {% for user in users %}
+        {% if user.id == magazine.user_id%}
+        <h2>Magazine by: {{user.first_name}}
+                    {{user.firstName}}
+                {% endif %}
+            {% endfor %}
+        </h2>
+        <h2>Description</h2>
+        <textarea disabled cols="25" rows="10">{{magazine.description}}</textarea>
+    </main>
+    <footer>
+
+    </footer>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+</body>
+</html>
